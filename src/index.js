@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createRoot } from "react-dom/client";
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
+//import "leaflet/dist/leaflet.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const map = document.getElementById("map");
+const root = createRoot(map);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <MapContainer
+    center={[51.505, -0.09]}
+    zoom={13}
+    style={{ width: "100%", height: "100vh" }}
+  >
+    <TileLayer
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    <Marker position={[51.505, -0.09]}>
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+    <Circle
+      center={[51.505, -0.09]}
+      radius={300}
+      pathOptions={{ color: "blue" }}
+    />
+  </MapContainer>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
